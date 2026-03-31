@@ -1,0 +1,161 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+@theme inline {
+  --color-background: oklch(0.12 0.02 260);
+  --color-foreground: oklch(0.95 0.01 260);
+  --color-card: oklch(0.16 0.025 260);
+  --color-card-foreground: oklch(0.95 0.01 260);
+  --color-popover: oklch(0.16 0.025 260);
+  --color-popover-foreground: oklch(0.95 0.01 260);
+  --color-primary: oklch(0.72 0.18 340);
+  --color-primary-foreground: oklch(0.12 0.02 260);
+  --color-secondary: oklch(0.22 0.03 260);
+  --color-secondary-foreground: oklch(0.85 0.01 260);
+  --color-muted: oklch(0.20 0.02 260);
+  --color-muted-foreground: oklch(0.60 0.02 260);
+  --color-accent: oklch(0.65 0.20 280);
+  --color-accent-foreground: oklch(0.95 0.01 260);
+  --color-destructive: oklch(0.65 0.22 25);
+  --color-destructive-foreground: oklch(0.95 0.01 260);
+  --color-border: oklch(0.25 0.03 260);
+  --color-input: oklch(0.22 0.03 260);
+  --color-ring: oklch(0.72 0.18 340);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --font-sans: 'Inter', 'Noto Sans SC', sans-serif;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: oklch(0.10 0.025 265);
+    min-height: 100vh;
+  }
+  .flex {
+    min-width: 0;
+    min-height: 0;
+  }
+  .container {
+    @apply mx-auto px-4;
+    max-width: 1200px;
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: oklch(0.30 0.04 260); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.40 0.05 260); }
+
+/* ─── Animations ────────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
+
+/* ─── Glassmorphism ─────────────────────────────────────────────────────────── */
+.glass {
+  background: oklch(0.18 0.025 260 / 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid oklch(0.35 0.04 260 / 0.4);
+}
+.glass-card {
+  background: oklch(0.16 0.025 260 / 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.30 0.04 260 / 0.5);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+.glass-card:hover {
+  background: oklch(0.20 0.03 260 / 0.85);
+  border-color: oklch(0.72 0.18 340 / 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px oklch(0.72 0.18 340 / 0.15);
+}
+
+/* ─── Emotional State Colors ────────────────────────────────────────────────── */
+.state-warm { color: oklch(0.80 0.15 30); }
+.state-playful { color: oklch(0.80 0.18 80); }
+.state-nostalgic { color: oklch(0.75 0.15 200); }
+.state-melancholy { color: oklch(0.65 0.12 260); }
+.state-happy { color: oklch(0.85 0.18 120); }
+.state-distant { color: oklch(0.60 0.05 260); }
+
+.state-bg-warm { background: oklch(0.80 0.15 30 / 0.15); border-color: oklch(0.80 0.15 30 / 0.3); }
+.state-bg-playful { background: oklch(0.80 0.18 80 / 0.15); border-color: oklch(0.80 0.18 80 / 0.3); }
+.state-bg-nostalgic { background: oklch(0.75 0.15 200 / 0.15); border-color: oklch(0.75 0.15 200 / 0.3); }
+.state-bg-melancholy { background: oklch(0.65 0.12 260 / 0.15); border-color: oklch(0.65 0.12 260 / 0.3); }
+.state-bg-happy { background: oklch(0.85 0.18 120 / 0.15); border-color: oklch(0.85 0.18 120 / 0.3); }
+.state-bg-distant { background: oklch(0.60 0.05 260 / 0.15); border-color: oklch(0.60 0.05 260 / 0.3); }
+
+/* ─── Chat Bubbles ──────────────────────────────────────────────────────────── */
+.bubble-user {
+  background: linear-gradient(135deg, oklch(0.72 0.18 340), oklch(0.65 0.20 280));
+  color: white;
+  border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
+}
+.bubble-ai {
+  background: oklch(0.20 0.03 260 / 0.9);
+  border: 1px solid oklch(0.30 0.04 260 / 0.6);
+  color: oklch(0.92 0.01 260);
+  border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+}
+
+/* ─── Gradient Text ─────────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.85 0.15 340), oklch(0.75 0.20 280));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Shimmer Loading ───────────────────────────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(90deg, oklch(0.20 0.03 260) 25%, oklch(0.28 0.04 260) 50%, oklch(0.20 0.03 260) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── Progress Bar ──────────────────────────────────────────────────────────── */
+.progress-bar {
+  background: linear-gradient(90deg, oklch(0.72 0.18 340), oklch(0.65 0.20 280));
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
